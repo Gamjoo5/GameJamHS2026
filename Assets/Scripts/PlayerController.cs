@@ -85,7 +85,15 @@ public class PlayerController2D : MonoBehaviour
         if (groundCheckTransform != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheckTransform.position, groundCheckRadius);
+            if (_playerCollider != null)
+            {
+                Vector2 boxSize = new Vector2(_playerCollider.bounds.size.x * 0.95f, 0.1f);
+                Gizmos.DrawWireCube(groundCheckTransform.position + Vector3.down * groundCheckRadius / 2f, new Vector3(boxSize.x, 0.1f + groundCheckRadius, 1f));
+            }
+            else
+            {
+                Gizmos.DrawWireSphere(groundCheckTransform.position, groundCheckRadius);
+            }
         }
     }
 
@@ -211,8 +219,19 @@ public class PlayerController2D : MonoBehaviour
 
     private void CheckGround()
     {
-        _isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
-        _isOnWater = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, waterLayer);
+        if (_playerCollider == null)
+        {
+            _isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
+            _isOnWater = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, waterLayer);
+            return;
+        }
+
+        // Use a BoxCast for better edge detection on ground
+        Vector2 origin = groundCheckTransform.position;
+        Vector2 boxSize = new Vector2(_playerCollider.bounds.size.x * 0.95f, 0.1f);
+        
+        _isGrounded = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, groundCheckRadius, groundLayer).collider != null;
+        _isOnWater = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, groundCheckRadius, waterLayer).collider != null;
     }
 
     private void CheckWallTouch()
@@ -227,8 +246,11 @@ public class PlayerController2D : MonoBehaviour
         // We use a height slightly smaller than the collider to avoid floor/ceiling hits.
         float direction = _moveInput > 0 ? 1 : -1;
         Vector2 origin = _playerCollider.bounds.center;
-        Vector2 boxSize = new Vector2(0.01f, _playerCollider.bounds.size.y * 0.9f);
-        float castDistance = _playerCollider.bounds.extents.x + 0.1f;
+        
+        // Shrink the height to avoid hitting ground/ceilings accidentally
+        // Shrink the width to avoid hitting things behind us if the collider is weirdly shaped
+        Vector2 boxSize = new Vector2(_playerCollider.bounds.size.x * 0.5f, _playerCollider.bounds.size.y * 0.8f);
+        float castDistance = _playerCollider.bounds.extents.x + 0.05f - (boxSize.x / 2f);
         
         RaycastHit2D hit = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.right * direction, castDistance, groundLayer);
         _isTouchingWall = hit.collider != null;
@@ -257,9 +279,9 @@ public class PlayerController2D : MonoBehaviour
 
         if (_isTouchingWall && !_isGrounded)
         {
-            // If touching a wall and in the air, don't allow movement into the wall
-            // but still allow movement away from it
-            rb.linearVelocityX = 0;
+            // If touching a wall and in the air, don't allow movement INTO the wall
+            // but still allow movement AWAY from it or falling
+            rb.linearVelocityX = Mathf.MoveTowards(rb.linearVelocityX, 0, currentSpeed * Time.fixedDeltaTime * 10f);
         }
         else
         {

@@ -681,8 +681,10 @@ MonoBehaviour:
   m_Camera: {fileID: 0}
 --- !u!50 &1695241945
 Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 1094480480430738051, guid: 3877e06536e11d8428f55177969f63ad, type: 3}
-  m_PrefabInstance: {fileID: 9085040078679543498}
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695241943}
   m_BodyType: 0
@@ -690,8 +692,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 4.5776e-41
+  m_AngularDamping: 1000000
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -703,7 +705,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &1695241946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,6 +723,7 @@ MonoBehaviour:
   defaultGravity: 1.5
   jumpHorizontalMultiplier: 0.5
   deathObjectPrefab: {fileID: 4991785902592193733, guid: 53145d30bae2f52acb471cc8a9f38288, type: 3}
+  respawnPoint: {fileID: 0}
   rb: {fileID: 1695241945}
   groundCheckTransform: {fileID: 1769522249}
   groundCheckRadius: 0.3
@@ -1166,7 +1169,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2830109472045191038, guid: 3877e06536e11d8428f55177969f63ad, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1185,3 +1189,4 @@ SceneRoots:
   - {fileID: 5793680815007549238}
   - {fileID: 61387126}
   - {fileID: 5883790275450582715}
+  - {fileID: 1695241948}
