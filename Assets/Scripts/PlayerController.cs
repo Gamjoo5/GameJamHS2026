@@ -114,6 +114,12 @@ public class PlayerController2D : MonoBehaviour
     {
         Debug.Log($"[PlayerController2D] Water state changed to: {state}");
         _currentWaterState = state;
+        
+        if (state == WaterState.Walking)
+        {
+            rb.excludeLayers &= ~waterLayer;
+            rb.gravityScale = defaultGravity;
+        }
     }
 
     public void Die()
@@ -290,7 +296,7 @@ public class PlayerController2D : MonoBehaviour
             rb.excludeLayers |= waterLayer;
         }
 
-        if (_isGrounded)
+        if (_isGrounded && _currentWaterState == WaterState.Walking)
         {
             rb.gravityScale = defaultGravity;
         }
