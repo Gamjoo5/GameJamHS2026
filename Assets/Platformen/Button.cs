@@ -24,11 +24,20 @@ public class Button : MonoBehaviour
     {
         if(other.CompareTag("Player") && !isPressed)
         {
-            isPressed = true;
-            if (buttonpressed) sr.sprite = buttonpressed;
-            onButtonPressed?.Invoke();
-            Debug.Log("Button von Player gedrückt!");
+            test();
         }
+        if (other.CompareTag("DeathObject"))
+        {
+            test();
+        }
+    }
+
+    void test()
+    {
+        isPressed = true;
+        if (buttonpressed) sr.sprite = buttonpressed;
+        onButtonPressed?.Invoke();
+        Debug.Log("Button von Player gedrückt!");
     }
 
     void OnTriggerExit2D(Collider2D other)
