@@ -28,6 +28,7 @@ public class PlayerController2D : MonoBehaviour
     private bool _isTouchingWall;
     private bool _isOnWater;
     private bool _isRotated;
+    private bool _hasFlintAndSteel;
     private WaterState _currentWaterState = WaterState.Walking;
 
     #region Unity Lifecycle
@@ -44,6 +45,7 @@ public class PlayerController2D : MonoBehaviour
         _actions.Player.Move.performed += OnMovement;
         _actions.Player.Jump.performed += OnJumping;
         _actions.Player.Crouch.performed += OnRotatePlayer;
+        _actions.Player.Interact.performed += OnBurnDeathObject;
 
         _actions.Player.Move.canceled += OnMovement;
         _actions.Player.Jump.canceled += OnJumping;
@@ -55,6 +57,7 @@ public class PlayerController2D : MonoBehaviour
         _actions.Player.Move.performed -= OnMovement;
         _actions.Player.Jump.performed -= OnJumping;
         _actions.Player.Crouch.performed -= OnRotatePlayer;
+        _actions.Player.Interact.performed -= OnBurnDeathObject;
 
         _actions.Player.Move.canceled -= OnMovement;
         _actions.Player.Jump.canceled -= OnJumping;
@@ -84,6 +87,12 @@ public class PlayerController2D : MonoBehaviour
     #endregion
 
     #region Public Methods
+
+    public void SetHasFlintAndSteel(bool state)
+    {
+        Debug.Log($"[PlayerController2D] Flint and Steel state set to: {state}");
+        _hasFlintAndSteel = state;
+    }
 
     public void SetWaterState(WaterState state)
     {
@@ -120,7 +129,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnJumping(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && _isGrounded)
+        if (ctx.performed && _isGrounded && _currentWaterState == WaterState.Walking)
         {
             Debug.Log("[PlayerController2D] Jump performed.");
             rb.linearVelocityY = jumpForce;
@@ -148,6 +157,30 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    private void OnBurnDeathObject(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("[PlayerController2D] Burn death object detected.");
+        if (ctx.performed)
+        {
+            if (_hasFlintAndSteel)
+            {
+                Debug.Log("[PlayerController2D] Burn death object attempt.");
+                
+                // Find all colliders in a small radius around the player
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1.5f);
+                foreach (var collider in colliders)
+                {
+                    if (collider.gameObject.name.Contains("DeathObject") || (deathObjectPrefab != null && collider.gameObject.name.Contains(deathObjectPrefab.name)))
+                    {
+                        Debug.Log($"[PlayerController2D] Burning and destroying: {collider.gameObject.name}");
+                        Destroy(collider.gameObject);
+                        break; // Destroy one at a time?
+                    }
+                }
+            }
+        }
+    }
+    
     #endregion
 
     #region Private Methods
@@ -180,7 +213,13 @@ public class PlayerController2D : MonoBehaviour
         if (_isOnWater && _currentWaterState == WaterState.Falling)
         {
             Debug.Log("[PlayerController2D] Falling through water.");
+            rb.gravityScale = 0.5f;
             rb.excludeLayers |= waterLayer;
+        }
+
+        if (_isGrounded)
+        {
+            rb.gravityScale = 1;
         }
     }
 
