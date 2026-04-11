@@ -1,7 +1,7 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class KillButton : MonoBehaviour
 {
@@ -12,11 +12,13 @@ public class KillButton : MonoBehaviour
     public Sprite buttonpressed;
     public Sprite buttonreleased;
 
+    [Header("Timer Settings")]
     public float resetDelay = 5f;
 
     private SpriteRenderer sr;
 
     public bool isPressed = false;
+    private bool isKillPending = false;
     public PlayerController2D player;
 
     void Start()
@@ -32,7 +34,11 @@ public class KillButton : MonoBehaviour
             if (buttonpressed) sr.sprite = buttonpressed;
             onButtonPressed?.Invoke();
             Debug.Log("Button von Player gedrückt!");
-            killPlayer();
+            
+            if (!isKillPending)
+            {
+                killPlayer();
+            }
         }
     }
 
@@ -49,12 +55,24 @@ public class KillButton : MonoBehaviour
 
     private void killPlayer()
     {
+        isKillPending = true;
         StartCoroutine(KillNachXSekunden());
     }
 
     private IEnumerator KillNachXSekunden()
     {
-        yield return new WaitForSeconds(resetDelay);
+        float remainingTime = resetDelay;
+        
+        while (remainingTime > 0)
+        {
+            yield return new WaitForSeconds(0.1f);
+            remainingTime -= 0.1f;
+        }
+
         player.Die();
+        
+        // Wait a small bit before resetting pending flag to avoid immediate re-triggering if respawned on button
+        yield return new WaitForSeconds(0.5f);
+        isKillPending = false;
     }   
 }
