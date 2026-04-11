@@ -15,7 +15,6 @@ public class Button : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Button pressed");
         if(other.CompareTag("Player") && !isPressed)
         {
             isPressed = true;

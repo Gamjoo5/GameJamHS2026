@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,9 +13,10 @@ public class PlayerController2D : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float defaultGravity = 3f;
+    [SerializeField] private float defaultGravity = 1.5f;
     [SerializeField] private float jumpHorizontalMultiplier = 0.5f;
     [SerializeField] private GameObject deathObjectPrefab;
+    [SerializeField] private Transform respawnPoint;
 
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
@@ -31,6 +33,7 @@ public class PlayerController2D : MonoBehaviour
     private bool _isOnWater;
     private bool _isRotated;
     private bool _hasFlintAndSteel;
+    private bool _isAlreadyDead = false;
     private WaterState _currentWaterState = WaterState.Walking;
 
     #region Unity Lifecycle
@@ -104,20 +107,21 @@ public class PlayerController2D : MonoBehaviour
 
     public void Die()
     {
+        if (_isAlreadyDead)
+        {
+            return;
+        }
+        _isAlreadyDead = true;
+
         Debug.Log("[PlayerController2D] Player died.");
         
         if (deathObjectPrefab != null)
         {
+            Debug.Log("DeathPreFab reached!");
             Instantiate(deathObjectPrefab, transform.position, transform.rotation);
         }
-        
-        transform.position = Vector3.zero;
-        rb.linearVelocity = Vector2.zero;
-        
-        // Reset normal position
-        transform.rotation = Quaternion.identity;
-        _isRotated = false;
-        SetWaterState(WaterState.Walking);
+
+        Respawn();
     }
 
     #endregion
@@ -131,7 +135,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnJumping(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && _isGrounded && _currentWaterState == WaterState.Walking)
+        if (ctx.performed && (_isGrounded || _isOnWater) && _currentWaterState == WaterState.Walking)
         {
             Debug.Log("[PlayerController2D] Jump performed.");
             rb.linearVelocityY = jumpForce;
@@ -182,10 +186,28 @@ public class PlayerController2D : MonoBehaviour
             }
         }
     }
-    
+
     #endregion
 
     #region Private Methods
+
+    private void Respawn()
+    {
+        transform.position = respawnPoint.position;
+        rb.linearVelocity = Vector2.zero;
+
+        // Reset normal position
+        transform.rotation = Quaternion.identity;
+        _isRotated = false;
+        SetWaterState(WaterState.Walking);
+        StartCoroutine(RespawnDelay());
+    }
+
+    private IEnumerator RespawnDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        _isAlreadyDead = false;
+    }
 
     private void CheckGround()
     {
