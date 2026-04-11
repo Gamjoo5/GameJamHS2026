@@ -87,8 +87,10 @@ public class PlayerController2D : MonoBehaviour
 
     private void Jumping(InputAction.CallbackContext ctx)
     {
+        Debug.Log(isGrounded);
+
         if (ctx.performed && isGrounded)
-        { 
+        {
             rb.linearVelocityY = jumpForce;
         }
     }
@@ -133,15 +135,6 @@ public class PlayerController2D : MonoBehaviour
         else
         {
             rb.linearVelocityX = move * speed;
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheckTransform != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheckTransform.position, groundCheckRadius);
         }
     }
 }
