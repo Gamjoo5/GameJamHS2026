@@ -12,6 +12,8 @@ public class PlayerController2D : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float defaultGravity = 3f;
+    [SerializeField] private float jumpHorizontalMultiplier = 0.5f;
     [SerializeField] private GameObject deathObjectPrefab;
 
     [Header("References")]
@@ -199,32 +201,38 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
         
-        // Check for walls in the movement direction
+        // Use a BoxCast for better edge detection (e.g. hitting small blocks with feet/head)
+        // We use a height slightly smaller than the collider to avoid floor/ceiling hits.
         float direction = _moveInput > 0 ? 1 : -1;
-        Vector2 rayOrigin = (Vector2)transform.position + _playerCollider.offset;
-        float rayDistance = _playerCollider.bounds.extents.x + 0.1f;
+        Vector2 origin = _playerCollider.bounds.center;
+        Vector2 boxSize = new Vector2(0.01f, _playerCollider.bounds.size.y * 0.9f);
+        float castDistance = _playerCollider.bounds.extents.x + 0.1f;
         
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * direction, rayDistance, groundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.right * direction, castDistance, groundLayer);
         _isTouchingWall = hit.collider != null;
     }
 
+    
+    
     private void HandleWaterFalling()
     {
         if (_isOnWater && _currentWaterState == WaterState.Falling)
         {
             Debug.Log("[PlayerController2D] Falling through water.");
-            rb.gravityScale = 0.5f;
+            rb.gravityScale = defaultGravity - 0.5f;
             rb.excludeLayers |= waterLayer;
         }
 
         if (_isGrounded)
         {
-            rb.gravityScale = 1;
+            rb.gravityScale = defaultGravity;
         }
     }
 
     private void ApplyMovement()
     {
+        float currentSpeed = _isGrounded ? speed : speed * jumpHorizontalMultiplier;
+
         if (_isTouchingWall && !_isGrounded)
         {
             // If touching a wall and in the air, don't allow movement into the wall
@@ -233,7 +241,7 @@ public class PlayerController2D : MonoBehaviour
         }
         else
         {
-            rb.linearVelocityX = _moveInput * speed;
+            rb.linearVelocityX = _moveInput * currentSpeed;
         }
     }
 
