@@ -3,6 +3,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController2D : MonoBehaviour
 {
+    public enum WATER_STATE
+    {
+        WALKING,
+        FALLING
+    }
+    
+    public void SetWaterState(WATER_STATE state)
+    {
+        waterState = state;
+    }
+    
     public InputSystem_Actions actions;
     public float speed = 10;
     public float jumpForce = 5;
@@ -12,9 +23,13 @@ public class PlayerController2D : MonoBehaviour
     public Transform groundCheckTransform;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
+    public LayerMask waterLayer;
     private bool isGrounded;
     private bool isTouchingWall;
     private Collider2D playerCollider;
+    
+    private WATER_STATE waterState =  WATER_STATE.WALKING;
+    private bool isOnWater = false;
 
     [SerializeField] private GameObject deathObjectPrefab;
     private bool isRotated = false;
@@ -25,6 +40,15 @@ public class PlayerController2D : MonoBehaviour
         playerCollider = GetComponent<Collider2D>();
     }
 
+    private void Update()
+    {
+        CheckGround();
+        
+        CheckWallTouch();
+
+        FallThrowWater();
+    }
+    
     private void OnEnable()
     {
         actions.Player.Enable();
@@ -78,6 +102,7 @@ public class PlayerController2D : MonoBehaviour
         // Reset normal position
         transform.rotation = Quaternion.identity;
         isRotated = false;
+        SetWaterState(WATER_STATE.WALKING);
     }
 
     private void Movement(InputAction.CallbackContext ctx)
@@ -93,13 +118,20 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void CheckGround()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
-        
-        CheckWallTouch();
+        isOnWater = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, waterLayer);
     }
 
+    private void FallThrowWater()
+    {
+        if (isOnWater && waterState == WATER_STATE.FALLING)
+        {
+            rb.excludeLayers |= waterLayer;
+        }
+    }
+    
     private void CheckWallTouch()
     {
         if (playerCollider == null || Mathf.Abs(move) < 0.01f)
