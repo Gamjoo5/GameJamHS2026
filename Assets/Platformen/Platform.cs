@@ -4,15 +4,11 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    //Neu
     public float speed;
     public int startingPoint;
     public Transform[] points;
-
     private int i; //index of array
     private bool isMoving = false;
-
-    private bool isA;
 
     void Start()
     {
