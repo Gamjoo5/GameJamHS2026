@@ -7,12 +7,13 @@ public class Platform : MonoBehaviour
     public float speed;
     public Transform startingPoint;
     //public Transform[] points;
-    public bool isStart = true;
+
+    public Button relButton;
 
     public Transform endpoint;
 
-    private int i; //index of array
-    private bool isMoving = false;
+    private int i;
+    //private bool isMoving = false;
 
     void Start()
     {
@@ -21,9 +22,7 @@ public class Platform : MonoBehaviour
 
     void Update()
     {
-        if (!isMoving) return;
-
-
+        
         /*
         if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
         {
@@ -36,17 +35,10 @@ public class Platform : MonoBehaviour
         */
         //Vector2.Distance(transform.position, startingPoint.position) < 0.02f
 
-        transform.position = Vector2.MoveTowards(transform.position, !isStart ? endpoint.position : startingPoint.position, speed * Time.deltaTime);
-
+        transform.position = Vector2.MoveTowards(transform.position, relButton.isPressed ? endpoint.position : startingPoint.position, speed * Time.deltaTime);
     }
 
     public void startPlatform(){
-        isMoving = true;
-        isStart = !isStart;
-    }
-
-    public void stopPlatform()
-    {
-        isMoving = false;
+        //isMoving = true;
     }
 }

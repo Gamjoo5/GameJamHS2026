@@ -6,7 +6,7 @@ public class Button : MonoBehaviour
 {
     public UnityEvent onButtonPressed;
     public UnityEvent onButtonReleased;
-    private bool isPressed = false;
+    public bool isPressed = false;
 
     void Start()
     {
