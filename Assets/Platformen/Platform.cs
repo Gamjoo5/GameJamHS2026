@@ -7,6 +7,7 @@ public class Platform : MonoBehaviour
     public float speed;
     public int startingPoint;
     public Transform[] points;
+
     private int i; //index of array
     private bool isMoving = false;
 
