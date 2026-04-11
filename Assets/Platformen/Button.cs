@@ -41,9 +41,5 @@ public class Button : MonoBehaviour
             onButtonReleased?.Invoke();
             Debug.Log("Button losgelassen!");
         }
-    }
-
-
-
-    
+    }    
 }
