@@ -5,17 +5,25 @@ public class Platform : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float speed;
-    public int startingPoint;
-    public Transform[] points;
-    private int i; //index of array
+    public Transform startingPoint;
+    //public Transform[] points;
+
+    public Button relButton;
+
+    public Transform endpoint;
+
+    private int i;
+    //private bool isMoving = false;
 
     void Start()
     {
-        transform.position = points[startingPoint].position;
+        transform.position = startingPoint.position;
     }
 
     void Update()
     {
+        
+        /*
         if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
         {
             i++;
@@ -24,7 +32,13 @@ public class Platform : MonoBehaviour
                 i = 0;
             }
         }
+        */
+        //Vector2.Distance(transform.position, startingPoint.position) < 0.02f
 
-        transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, relButton.isPressed ? endpoint.position : startingPoint.position, speed * Time.deltaTime);
+    }
+
+    public void startPlatform(){
+        //isMoving = true;
     }
 }
