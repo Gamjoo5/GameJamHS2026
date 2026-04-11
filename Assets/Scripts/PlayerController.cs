@@ -24,6 +24,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask waterLayer;
+    [SerializeField] private LayerMask slipperyLayer;
 
     private InputSystem_Actions _actions;
     private Collider2D _playerCollider;
@@ -31,6 +32,8 @@ public class PlayerController2D : MonoBehaviour
     private bool _isGrounded;
     private bool _isTouchingWall;
     private bool _isOnWater;
+    private bool _isOnSlipperySurface;
+    private Vector2 _slipperyNormal;
     private bool _isRotated;
     private bool _hasFlintAndSteel;
     private bool _isAlreadyDead = false;
@@ -143,7 +146,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnJumping(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && (_isGrounded || _isOnWater) && _currentWaterState == WaterState.Walking)
+        if (ctx.performed && (_isGrounded || _isOnWater) && _currentWaterState == WaterState.Walking && !_isOnSlipperySurface)
         {
             Debug.Log("[PlayerController2D] Jump performed.");
             rb.linearVelocityY = jumpForce;
@@ -152,6 +155,11 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnRotatePlayer(InputAction.CallbackContext ctx)
     {
+        if (_isOnSlipperySurface)
+        {
+            return;
+        }
+        
         if (ctx.performed)
         {
             if (!_isRotated)
@@ -223,6 +231,14 @@ public class PlayerController2D : MonoBehaviour
         {
             _isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
             _isOnWater = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, waterLayer);
+            
+            Collider2D slipperyCol = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, slipperyLayer);
+            _isOnSlipperySurface = slipperyCol != null;
+            if (_isOnSlipperySurface)
+            {
+                // Simple normal for circle overlap
+                _slipperyNormal = Vector2.up; 
+            }
             return;
         }
 
@@ -232,6 +248,13 @@ public class PlayerController2D : MonoBehaviour
         
         _isGrounded = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, groundCheckRadius, groundLayer).collider != null;
         _isOnWater = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, groundCheckRadius, waterLayer).collider != null;
+        
+        RaycastHit2D slipperyHit = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, groundCheckRadius, slipperyLayer);
+        _isOnSlipperySurface = slipperyHit.collider != null;
+        if (_isOnSlipperySurface)
+        {
+            _slipperyNormal = slipperyHit.normal;
+        }
     }
 
     private void CheckWallTouch()
@@ -275,6 +298,28 @@ public class PlayerController2D : MonoBehaviour
 
     private void ApplyMovement()
     {
+        if (_isOnSlipperySurface)
+        {
+            // If on a slope, let's nudge the player in the direction of the slope
+            // If the normal is perfectly vertical (Vector2.up), we might still want to slide if there was velocity.
+            // But if it's a slope (normal.x != 0), we should definitely slide down.
+            if (Mathf.Abs(_slipperyNormal.x) > 0.01f)
+            {
+                // Slide down the slope: The direction along the slope is perpendicular to the normal.
+                // For a 2D slope, if normal is (nx, ny), a tangent is (ny, -nx) or (-ny, nx).
+                // We want to go "down", which usually means nx and tangent.x have same sign if slope is positive? 
+                // Actually, just applying a small force in the x direction of the normal might suffice to overcome static friction.
+                // Or better: calculate the downward direction along the slope.
+                Vector2 slideDir = new Vector2(_slipperyNormal.y, -_slipperyNormal.x);
+                if (slideDir.y > 0) slideDir = -slideDir; // Ensure we go down
+                
+                rb.AddForce(slideDir * 5f, ForceMode2D.Force);
+            }
+            
+            // Still disable player control
+            return;
+        }
+        
         float currentSpeed = _isGrounded ? speed : speed * jumpHorizontalMultiplier;
 
         if (_isTouchingWall && !_isGrounded)
