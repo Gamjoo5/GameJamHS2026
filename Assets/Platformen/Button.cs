@@ -13,7 +13,8 @@ public class Button : MonoBehaviour
 
     private SpriteRenderer sr;
 
-    public bool isPressed = false;
+    private int objectsOnButton = 0;
+    public bool isPressed => objectsOnButton > 0;
 
     void Start()
     {
@@ -22,32 +23,40 @@ public class Button : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && !isPressed)
+        if (other.CompareTag("Player") || other.CompareTag("DeathObject"))
         {
-            test();
-        }
-        if (other.CompareTag("DeathObject"))
-        {
-            test();
+            objectsOnButton++;
+            if (objectsOnButton == 1)
+            {
+                PressButton();
+            }
         }
     }
 
-    void test()
+    void PressButton()
     {
-        isPressed = true;
         if (buttonpressed) sr.sprite = buttonpressed;
         onButtonPressed?.Invoke();
-        Debug.Log("Button von Player gedrückt!");
+        Debug.Log("Button gedrückt!");
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && isPressed)
+        if (other.CompareTag("Player") || other.CompareTag("DeathObject"))
         {
-            isPressed = false;
-            if (buttonreleased) sr.sprite = buttonreleased;
-            onButtonReleased?.Invoke();
-            Debug.Log("Button losgelassen!");
+            objectsOnButton--;
+            if (objectsOnButton <= 0)
+            {
+                objectsOnButton = 0;
+                ReleaseButton();
+            }
         }
-    }    
+    }
+
+    void ReleaseButton()
+    {
+        if (buttonreleased) sr.sprite = buttonreleased;
+        onButtonReleased?.Invoke();
+        Debug.Log("Button losgelassen!");
+    }
 }
