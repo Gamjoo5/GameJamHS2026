@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 21476e340ec9ea74d812083d73cfc754
+guid: 5ecb268990f0d9b4cb057a81dd766f59
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8371362285786240412
-    second: buttondown_0
+      213: 1267150393101658455
+    second: buttown_up_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: buttondown_0
+      name: buttown_up_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 68
+        y: 0
         width: 250
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c95146245ad0d2470800000000000000
-      internalID: 8371362285786240412
+      spriteID: 75922d1a192d59110800000000000000
+      internalID: 1267150393101658455
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e51f780e602dae646abfe6b79d08361d
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      buttondown_0: 8371362285786240412
+      buttown_up_0: 1267150393101658455
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

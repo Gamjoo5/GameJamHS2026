@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: c26f0160ad11d3f49bdf0fd0e1e0edd9
+guid: 90f935b04acffe846b27d1b659f7666c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1706731217923313833
-    second: buttonup_0
+      213: -6802941236554959525
+    second: buttown_down_0
+  - first:
+      213: -4941359941040143049
+    second: buttown_down_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: buttonup_0
+      name: buttown_down_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 73
+        y: 0
         width: 250
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 43
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a0936300078fa710800000000000000
-      internalID: 1706731217923313833
+      spriteID: b55f8472df81791a0800000000000000
+      internalID: -6802941236554959525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttown_down_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 250
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73505f66053cc6bb0800000000000000
+      internalID: -4941359941040143049
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f26d3019fdc7fed43af236c182b1866b
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      buttonup_0: 1706731217923313833
+      buttown_down_0: -6802941236554959525
+      buttown_down_1: -4941359941040143049
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
