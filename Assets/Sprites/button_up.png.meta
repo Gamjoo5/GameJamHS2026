@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 90f935b04acffe846b27d1b659f7666c
+guid: a9e9d24606e41e9439b7034c59b25aa0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6802941236554959525
-    second: buttown_down_0
-  - first:
-      213: -4941359941040143049
-    second: buttown_down_1
+      213: 2704241387174868957
+    second: button_up_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -99,62 +96,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: buttown_down_0
+      name: button_up_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 64
         y: 0
-        width: 250
-        height: 43
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b55f8472df81791a0800000000000000
-      internalID: -6802941236554959525
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: buttown_down_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 250
-        height: 32
+        width: 122
+        height: 250
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 73505f66053cc6bb0800000000000000
-      internalID: -4941359941040143049
+      spriteID: dd7b775c635678520800000000000000
+      internalID: 2704241387174868957
       vertices: []
       indices: 
       edges: []
@@ -163,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f26d3019fdc7fed43af236c182b1866b
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      buttown_down_0: -6802941236554959525
-      buttown_down_1: -4941359941040143049
+      button_up_0: 2704241387174868957
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
