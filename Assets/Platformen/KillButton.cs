@@ -1,8 +1,9 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Button : MonoBehaviour
+public class KillButton : MonoBehaviour
 {
     public UnityEvent onButtonPressed;
     public UnityEvent onButtonReleased;
@@ -11,9 +12,12 @@ public class Button : MonoBehaviour
     public Sprite buttonpressed;
     public Sprite buttonreleased;
 
+    public float resetDelay = 5f;
+
     private SpriteRenderer sr;
 
     public bool isPressed = false;
+    public PlayerController2D player;
 
     void Start()
     {
@@ -28,6 +32,7 @@ public class Button : MonoBehaviour
             if (buttonpressed) sr.sprite = buttonpressed;
             onButtonPressed?.Invoke();
             Debug.Log("Button von Player gedrückt!");
+            killPlayer();
         }
     }
 
@@ -40,5 +45,16 @@ public class Button : MonoBehaviour
             onButtonReleased?.Invoke();
             Debug.Log("Button losgelassen!");
         }
-    }    
+    } 
+
+    private void killPlayer()
+    {
+        StartCoroutine(KillNachXSekunden());
+    }
+
+    private IEnumerator KillNachXSekunden()
+    {
+        yield return new WaitForSeconds(resetDelay);
+        player.Die();
+    }   
 }
