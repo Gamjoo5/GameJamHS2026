@@ -10,6 +10,7 @@ public class Platform : MonoBehaviour
     public Transform[] points;
 
     private int i; //index of array
+    private bool isMoving = false;
 
     private bool isA;
 
@@ -20,6 +21,8 @@ public class Platform : MonoBehaviour
 
     void Update()
     {
+        if (!isMoving) return;
+
         if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
         {
             i++;
@@ -30,5 +33,14 @@ public class Platform : MonoBehaviour
         }
 
         transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+    }
+
+    public void startPlatform(){
+        isMoving = true;
+    }
+
+    public void stopPlatform()
+    {
+        isMoving = false;
     }
 }
