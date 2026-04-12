@@ -68,6 +68,12 @@ public class KillButton : MonoBehaviour
         
         while (remainingTime > 0)
         {
+            if (player != null && player.IsOnWater)
+            {
+                Debug.Log("[KillButton] Player is on water, stopping kill timer.");
+                isKillPending = false;
+                yield break;
+            }
             yield return new WaitForSeconds(0.1f);
             remainingTime -= 0.1f;
         }

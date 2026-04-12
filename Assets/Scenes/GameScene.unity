@@ -46414,14 +46414,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1866232033591101036, guid: 158e6857815041c1fb94eb105abc6246, type: 3}
-      propertyPath: m_SortingLayer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1866232033591101036, guid: 158e6857815041c1fb94eb105abc6246, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1531577755
-      objectReference: {fileID: 0}
     - target: {fileID: 6075225057863433556, guid: 158e6857815041c1fb94eb105abc6246, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.81
@@ -47193,21 +47185,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlintAndSteelTrigger
       objectReference: {fileID: 0}
-    - target: {fileID: 7217211606864763634, guid: e7186205c56463510b199d8c7fb0ffd9, type: 3}
-      propertyPath: m_SortingLayer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217211606864763634, guid: e7186205c56463510b199d8c7fb0ffd9, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1531577755
-      objectReference: {fileID: 0}
     - target: {fileID: 7411244055011684797, guid: e7186205c56463510b199d8c7fb0ffd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.1471405
       objectReference: {fileID: 0}
     - target: {fileID: 7411244055011684797, guid: e7186205c56463510b199d8c7fb0ffd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.159506
+      value: 11.8
       objectReference: {fileID: 0}
     - target: {fileID: 7411244055011684797, guid: e7186205c56463510b199d8c7fb0ffd9, type: 3}
       propertyPath: m_LocalPosition.z
