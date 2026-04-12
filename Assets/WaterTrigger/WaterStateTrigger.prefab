@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1531577755
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3932133499221316732, guid: 6ea6873a3388fa543b8adee61f4d166c, type: 3}
@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab16c0a7d884bcfa4d93ecf81638bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaterStateTrigger
+  enterSound: {fileID: 8300000, guid: 0fec6d7aa20483f9ab7dbdeae07ca73e, type: 3}
+  volume: 1
 --- !u!61 &377810864100913751
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d1d23b11d046c99d9b8c245decca70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlintAndSteelTrigger
-  enterSound: {fileID: 8300000, guid: dfcfbf90858996934b182fa15596c6f5, type: 3}
+  enterSound: {fileID: 8300000, guid: 99d1d62b4470400d8824b0e5d9fc1350, type: 3}
   volume: 1
 --- !u!61 &6046897609951248333
 BoxCollider2D:

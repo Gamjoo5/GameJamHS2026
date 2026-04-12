@@ -47,6 +47,14 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("Visual representation of the burning state.")]
     [SerializeField] private SpriteRenderer burningRenderer;
 
+    [Header("Sound Settings")]
+    [Tooltip("The sound played when the fire is put out.")]
+    [SerializeField] private AudioClip firePutOutSound;
+    [Tooltip("The sound looped while the player is burning.")]
+    [SerializeField] private AudioClip burningSound;
+    [Tooltip("The volume of the sounds played.")]
+    [SerializeField, Range(0f, 1f)] private float volume = 1f;
+
     [Header("Collision & Layers")]
     [Tooltip("Transform used to check for ground.")]
     [SerializeField] private Transform groundCheckTransform;
@@ -76,6 +84,8 @@ public class PlayerController2D : MonoBehaviour
     private WaterState _currentWaterState = WaterState.Walking;
     public bool IsOnWater => _isOnWater;
 
+    private AudioSource _burningAudioSource;
+
     #region Unity Lifecycle
 
     private void Awake()
@@ -87,6 +97,14 @@ public class PlayerController2D : MonoBehaviour
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
         originalLighterLocalXPosition = lighterRenderer.transform.localPosition.x;
+        
+        // Initialize AudioSource for looping burning sound
+        _burningAudioSource = gameObject.AddComponent<AudioSource>();
+        _burningAudioSource.loop = true;
+        _burningAudioSource.playOnAwake = false;
+        _burningAudioSource.clip = burningSound;
+        _burningAudioSource.volume = volume;
+
         UpdateItemVisibility();
     }
 
@@ -200,7 +218,34 @@ public class PlayerController2D : MonoBehaviour
 
     public void SetBurning(bool state)
     {
+        if (_isBurning == state) return;
+
         Debug.Log($"[PlayerController2D] Burning state set to: {state}");
+        
+        if (state)
+        {
+            // Start burning sound
+            if (burningSound != null)
+            {
+                _burningAudioSource.clip = burningSound;
+                _burningAudioSource.Play();
+            }
+        }
+        else
+        {
+            // Stop burning sound
+            if (_burningAudioSource.isPlaying)
+            {
+                _burningAudioSource.Stop();
+                
+                // Play fire put out sound if we were burning
+                if (firePutOutSound != null)
+                {
+                    AudioSource.PlayClipAtPoint(firePutOutSound, transform.position, volume);
+                }
+            }
+        }
+
         _isBurning = state;
         UpdateBurningVisibility();
     }
