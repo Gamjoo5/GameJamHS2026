@@ -13,6 +13,12 @@ public class KillButton : MonoBehaviour
     public Sprite buttonreleased;
     public GameObject fireObject;
 
+    [Header("Sound Settings")]
+    [Tooltip("The sound played when the button is pressed.")]
+    [SerializeField] private AudioClip pressSound;
+    [Tooltip("The volume of the sound played.")]
+    [SerializeField, Range(0f, 1f)] private float volume = 1f;
+
     [Header("Timer Settings")]
     public float resetDelay = 5f;
 
@@ -36,6 +42,7 @@ public class KillButton : MonoBehaviour
             if (buttonpressed) sr.sprite = buttonpressed;
             onButtonPressed?.Invoke();
             Debug.Log("Button von Player gedrückt!");
+            PlayPressSound();
             
             if (!isKillPending)
             {
@@ -94,5 +101,13 @@ public class KillButton : MonoBehaviour
         fireObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         fireObject.SetActive(false);
+    }
+
+    private void PlayPressSound()
+    {
+        if (pressSound != null)
+        {
+            AudioSource.PlayClipAtPoint(pressSound, transform.position, volume);
+        }
     }
 }

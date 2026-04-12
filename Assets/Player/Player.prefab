@@ -109,7 +109,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -468645927
-  m_SortingLayer: 6
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3980104607598228893, guid: c502de7faad79f6cea1c121d2a6b4643, type: 3}
@@ -211,7 +211,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1531577755
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 978942612559604503, guid: 60d6e9c59a2c1394d9b7ff3acd319d73, type: 3}
@@ -298,13 +298,19 @@ MonoBehaviour:
   defaultGravity: 1.5
   jumpHorizontalMultiplier: 0.5
   lighterOffset: -0.7
+  burningOffset: 0.5
   deathObjectPrefab: {fileID: 4991785902592193733, guid: 53145d30bae2f52acb471cc8a9f38288, type: 3}
   respawnPoint: {fileID: 0}
+  deathYThreshold: -100
   rb: {fileID: 1094480480430738051}
   spriteRenderer: {fileID: 5442397079658078662}
   walkingSprite: {fileID: 978942612559604503, guid: 60d6e9c59a2c1394d9b7ff3acd319d73, type: 3}
   fallingSprite: {fileID: 2203546518451071824, guid: 6ef57921f0cdd1a42b73072ccc3a3886, type: 3}
   lighterRenderer: {fileID: 3117006564560866106}
+  burningRenderer: {fileID: 0}
+  firePutOutSound: {fileID: 8300000, guid: 9cfaeff482e3a4ccfaf6c4bce57a088f, type: 3}
+  burningSound: {fileID: 8300000, guid: d5251d01ee179a529b3363cfb95389a0, type: 3}
+  volume: 1
   groundCheckTransform: {fileID: 8764704610967341013}
   groundCheckRadius: 0.3
   groundLayer:
@@ -365,6 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd71e9ae8bec5346a321531e3d45402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OnPlayerDeath
+  deathSound: {fileID: 8300000, guid: dfcfbf90858996934b182fa15596c6f5, type: 3}
+  volume: 1
   respawnManager: {fileID: 0}
 --- !u!114 &7823465277680011421
 MonoBehaviour:
