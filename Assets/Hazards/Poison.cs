@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Poison : MonoBehaviour
 {
-    public bool abflussVerstopft = true;
+    public bool abflussVerstopft;
     public Transform targetpoint;
     public int speed;
 
@@ -10,7 +10,7 @@ public class Poison : MonoBehaviour
 
     private void Start()
     {
-        abflussVerstopft = true;
+        abflussVerstopft = false;
     }
 
     private void Update()
