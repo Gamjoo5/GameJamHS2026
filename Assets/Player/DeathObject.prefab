@@ -166,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de59dad061016844f8034e8df13afecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnCorpse
+  burningSound: {fileID: 8300000, guid: d5251d01ee179a529b3363cfb95389a0, type: 3}
+  volume: 3
   burnSpriteRenderer: {fileID: 5405506002851941561}
 --- !u!70 &9025218051374866473
 CapsuleCollider2D:
