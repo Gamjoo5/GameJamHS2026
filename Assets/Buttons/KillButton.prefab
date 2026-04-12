@@ -118,7 +118,7 @@ MonoBehaviour:
   buttonreleased: {fileID: 21300000, guid: a9e9d24606e41e9439b7034c59b25aa0, type: 3}
   fireObject: {fileID: 5595424898230315156}
   pressSound: {fileID: 8300000, guid: d5251d01ee179a529b3363cfb95389a0, type: 3}
-  volume: 1
+  volume: 0.3
   resetDelay: 5
   isPressed: 0
   player: {fileID: 0}
