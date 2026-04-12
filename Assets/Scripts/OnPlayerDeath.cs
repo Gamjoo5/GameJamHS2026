@@ -3,8 +3,11 @@ using UnityEngine;
 public class OnPlayerDeath : MonoBehaviour, IOnDeath
 {
 
-    private PlayerController2D playerController;
+    [Header("References")]
+    [Tooltip("Manager responsible for respawning enemies when the player dies.")]
     [SerializeField] private RespawnManager respawnManager;
+
+    private PlayerController2D playerController;
     
 
     public void OnDeath()

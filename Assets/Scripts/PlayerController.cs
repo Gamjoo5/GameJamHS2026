@@ -10,20 +10,49 @@ public class PlayerController2D : MonoBehaviour
         Falling
     }
 
-    [Header("Settings")]
+    [Header("Movement Settings")]
+    [Tooltip("The movement speed of the player.")]
     [SerializeField] private float speed = 10f;
+    [Tooltip("The vertical force applied when jumping.")]
     [SerializeField] private float jumpForce = 5f;
+    [Tooltip("The default gravity scale of the player.")]
     [SerializeField] private float defaultGravity = 1.5f;
+    [Tooltip("How much movement control is retained while in the air.")]
     [SerializeField] private float jumpHorizontalMultiplier = 0.5f;
+    [SerializeField] private float lighterOffset = -0.7f;
+
+    [Header("Death & Respawn")]
+    [Tooltip("The prefab instantiated when the player dies.")]
     [SerializeField] private GameObject deathObjectPrefab;
+    [Tooltip("The position where the player respawns.")]
     [SerializeField] private Transform respawnPoint;
 
     [Header("References")]
+    [Tooltip("Reference to the player's Rigidbody2D.")]
     [SerializeField] private Rigidbody2D rb;
+
+    [Header("Sprites & Visuals")]
+    [Tooltip("Main sprite renderer for the player.")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [Tooltip("Sprite used when the player is walking.")]
+    [SerializeField] private Sprite walkingSprite;
+    [Tooltip("Sprite used when the player is in the 'Falling' state (heavy).")]
+    [SerializeField] private Sprite fallingSprite;
+    [Space(5)]
+    [Tooltip("Visual representation of the lighter (Lighter) item.")]
+    [SerializeField] private SpriteRenderer lighterRenderer;
+
+    [Header("Collision & Layers")]
+    [Tooltip("Transform used to check for ground.")]
     [SerializeField] private Transform groundCheckTransform;
+    [Tooltip("Radius of the ground check sphere/box.")]
     [SerializeField] private float groundCheckRadius = 0.2f;
+    [Space(5)]
+    [Tooltip("The layer(s) considered as solid ground.")]
     [SerializeField] private LayerMask groundLayer;
+    [Tooltip("The layer(s) considered as water.")]
     [SerializeField] private LayerMask waterLayer;
+    [Tooltip("The layer(s) considered as slippery surfaces.")]
     [SerializeField] private LayerMask slipperyLayer;
 
     private InputSystem_Actions _actions;
@@ -36,6 +65,7 @@ public class PlayerController2D : MonoBehaviour
     private Vector2 _slipperyNormal;
     private bool _isRotated;
     private bool _hasFlintAndSteel;
+    private bool _hasLighter;
     private bool _isAlreadyDead = false;
     private WaterState _currentWaterState = WaterState.Walking;
 
@@ -45,6 +75,12 @@ public class PlayerController2D : MonoBehaviour
     {
         _actions = new InputSystem_Actions();
         _playerCollider = GetComponent<Collider2D>();
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        originalLighterLocalXPosition = lighterRenderer.transform.localPosition.x;
+        UpdateItemVisibility();
     }
 
     private void OnEnable()
@@ -108,6 +144,15 @@ public class PlayerController2D : MonoBehaviour
     {
         Debug.Log($"[PlayerController2D] Flint and Steel state set to: {state}");
         _hasFlintAndSteel = state;
+        _hasLighter = state; // Assuming Lighter and Flint and Steel are related/same for this jam
+        UpdateItemVisibility();
+    }
+
+    public void SetHasLighter(bool state)
+    {
+        Debug.Log($"[PlayerController2D] Lighter state set to: {state}");
+        _hasLighter = state;
+        UpdateItemVisibility();
     }
 
     public void SetWaterState(WaterState state)
@@ -119,7 +164,20 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.excludeLayers &= ~waterLayer;
             rb.gravityScale = defaultGravity;
+            if (spriteRenderer != null && walkingSprite != null)
+            {
+                spriteRenderer.sprite = walkingSprite;
+            }
         }
+        else if (state == WaterState.Falling)
+        {
+            if (spriteRenderer != null && fallingSprite != null)
+            {
+                spriteRenderer.sprite = fallingSprite;
+            }
+        }
+        
+        UpdateItemVisibility();
     }
 
     public void Die()
@@ -190,7 +248,7 @@ public class PlayerController2D : MonoBehaviour
         Debug.Log("[PlayerController2D] Burn death object detected.");
         if (ctx.performed)
         {
-            if (_hasFlintAndSteel)
+            if (_hasFlintAndSteel || _hasLighter)
             {
                 Debug.Log("[PlayerController2D] Burn death object attempt.");
                 
@@ -213,14 +271,36 @@ public class PlayerController2D : MonoBehaviour
 
     #region Private Methods
 
+    private float originalLighterLocalXPosition;
+    
+    private void UpdateItemVisibility()
+    {
+        if (lighterRenderer != null)
+        {
+            lighterRenderer.enabled = _hasLighter;
+            if (WaterState.Falling == _currentWaterState && lighterRenderer.enabled)
+            {
+                lighterRenderer.transform.localPosition = new Vector3(originalLighterLocalXPosition + lighterOffset, lighterRenderer.transform.localPosition.y, lighterRenderer.transform.localPosition.z);
+            }
+            else
+            {
+                lighterRenderer.transform.localPosition = new Vector3(originalLighterLocalXPosition, lighterRenderer.transform.localPosition.y, lighterRenderer.transform.localPosition.z);
+            }
+        }
+    }
+
     private void Respawn()
     {
         transform.position = respawnPoint.position;
         rb.linearVelocity = Vector2.zero;
 
+        // Reset items and states
+        _hasFlintAndSteel = false;
+        _hasLighter = false;
+        _isRotated = false;
+        
         // Reset normal position
         transform.rotation = Quaternion.identity;
-        _isRotated = false;
         SetWaterState(WaterState.Walking);
         StartCoroutine(RespawnDelay());
     }
