@@ -53,7 +53,7 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("The sound looped while the player is burning.")]
     [SerializeField] private AudioClip burningSound;
     [Tooltip("The volume of the sounds played.")]
-    [SerializeField, Range(0f, 1f)] private float volume = 1f;
+    [SerializeField, Range(0f, 10f)] private float volume = 1f;
 
     [Header("Collision & Layers")]
     [Tooltip("Transform used to check for ground.")]

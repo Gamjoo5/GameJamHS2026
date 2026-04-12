@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de59dad061016844f8034e8df13afecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnCorpse
-  burnSpriteRenderer: {fileID: 0}
+  burnSpriteRenderer: {fileID: 5405506002851941561}
 --- !u!70 &9025218051374866473
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -468645927
-  m_SortingLayer: 6
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a53e3da70fa314f4fa16986400ac4049, type: 3}

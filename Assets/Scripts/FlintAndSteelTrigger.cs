@@ -6,7 +6,7 @@ public class FlintAndSteelTrigger : MonoBehaviour
     [Tooltip("The sound played when the player enters this trigger.")]
     [SerializeField] private AudioClip enterSound;
     [Tooltip("The volume of the sound played.")]
-    [SerializeField, Range(0f, 1f)] private float volume = 1f;
+    [SerializeField, Range(0f, 10f)] private float volume = 1f;
 
     #region Unity Lifecycle
 

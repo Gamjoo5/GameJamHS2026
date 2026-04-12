@@ -7,7 +7,7 @@ public class OnPlayerDeath : MonoBehaviour, IOnDeath
     [Tooltip("The sound played when the player dies.")]
     [SerializeField] private AudioClip deathSound;
     [Tooltip("The volume of the sound played.")]
-    [SerializeField, Range(0f, 1f)] private float volume = 1f;
+    [SerializeField, Range(0f, 10f)] private float volume = 1f;
 
     [Header("References")]
     [Tooltip("Manager responsible for respawning enemies when the player dies.")]
