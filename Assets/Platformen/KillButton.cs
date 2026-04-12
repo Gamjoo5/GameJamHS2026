@@ -11,6 +11,7 @@ public class KillButton : MonoBehaviour
     [Header("Texturen")]
     public Sprite buttonpressed;
     public Sprite buttonreleased;
+    public GameObject fireObject;
 
     [Header("Timer Settings")]
     public float resetDelay = 5f;
@@ -24,6 +25,7 @@ public class KillButton : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        fireObject.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -38,6 +40,7 @@ public class KillButton : MonoBehaviour
             if (!isKillPending)
             {
                 killPlayer();
+                StartCoroutine(PlayFireAnimation());
             }
         }
     }
@@ -75,4 +78,12 @@ public class KillButton : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isKillPending = false;
     }   
+
+    private IEnumerator PlayFireAnimation()
+    {
+        Debug.Log("Fire");
+        fireObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        fireObject.SetActive(false);
+    }
 }
