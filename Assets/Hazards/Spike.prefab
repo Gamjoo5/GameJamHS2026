@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 328036912505562167}
   - component: {fileID: 7901176626627144557}
   - component: {fileID: 8540769160431486775}
+  - component: {fileID: 835460017555345759}
   - component: {fileID: 6824406688545119914}
   m_Layer: 0
   m_Name: Spike
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hazard
   player: {fileID: 0}
+--- !u!114 &835460017555345759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8892787827992174914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e6bb5eb67d2a74a80285a87ae375f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
 --- !u!212 &6824406688545119914
 SpriteRenderer:
   serializedVersion: 2

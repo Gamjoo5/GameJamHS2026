@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class OnPlayerDeath : MonoBehaviour, IOnDeath
+{
+
+    private PlayerController2D playerController;
+    [SerializeField] private RespawnManager respawnManager;
+    
+
+    public void OnDeath()
+    {
+        playerController.Die();
+        respawnManager.RespawnAllEnemies();
+
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        playerController = GetComponent<PlayerController2D>();
+        
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
