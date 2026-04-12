@@ -323,6 +323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae3e7935ca61904ebcbbd7210c6874b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RespawnManager
+  respawnSound: {fileID: 0}
+  volume: 1
 --- !u!1001 &120341044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,6 +345,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6189407
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (8)
@@ -468,6 +474,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6189407
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (7)
@@ -1091,6 +1101,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.21568629
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (4)
@@ -1582,6 +1596,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9652516
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (5)
@@ -1799,6 +1817,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9960785
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (3)
@@ -1964,6 +1986,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.21568629
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (10)
@@ -46987,6 +47013,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen
@@ -47841,6 +47871,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.2509804
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (1)
@@ -48117,6 +48151,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.21568629
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (9)
@@ -48251,6 +48289,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6189407
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (6)
@@ -48634,6 +48676,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.25444004
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen
@@ -48854,7 +48900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5442397079658078662, guid: 3877e06536e11d8428f55177969f63ad, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5442397079658078662, guid: 3877e06536e11d8428f55177969f63ad, type: 3}
       propertyPath: m_SortingLayerID
@@ -49329,6 +49375,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1485115828278502258, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
+      propertyPath: startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bf845177d979066382ae77e91124fdd, type: 3}
     - target: {fileID: 3193160572527091922, guid: 4d1b61c0f6b273a4d972ceff39ae5fd0, type: 3}
       propertyPath: m_Name
       value: Platformen (1)

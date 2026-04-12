@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf9b56ed9c54818be63722361c4dc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hazard
-  deathSound: {fileID: 8300000, guid: 7873e3aa72ca3412ca2d714c5b83f7cb, type: 3}
+  deathSound: {fileID: 0}
   volume: 1
   player: {fileID: 0}
 --- !u!114 &835460017555345759
