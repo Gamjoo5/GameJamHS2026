@@ -138,6 +138,8 @@ GameObject:
   - component: {fileID: 4041223440936197986}
   - component: {fileID: 4729831692479627243}
   - component: {fileID: 7823465277680011421}
+  - component: {fileID: 6408862631402985137}
+  - component: {fileID: 7391048205736482910}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -365,6 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OnPlayerDeath
   respawnManager: {fileID: 0}
 --- !u!114 &7823465277680011421
+--- !u!114 &7391048205736482910
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -379,6 +382,12 @@ MonoBehaviour:
   maxHealth: 1
 --- !u!1 &8103002226034715547
 GameObject:
+  m_Script: {fileID: 11500000, guid: 988acd36955d98049baf140438cabb14, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+--- !u!95 &6408862631402985137
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -514,3 +523,18 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+  m_GameObject: {fileID: 4759288151394548845}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d1cfe39b04f9e7c458acfe7b1cce012d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
