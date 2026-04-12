@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Poison : MonoBehaviour
@@ -5,6 +6,8 @@ public class Poison : MonoBehaviour
     public bool abflussVerstopft;
     public Transform targetpoint;
     public int speed;
+    [SerializeField] private GameObject zufuhr;
+
 
     private bool isRising = false;
 
@@ -28,7 +31,15 @@ public class Poison : MonoBehaviour
     public void Rise()
     {
         Debug.Log(abflussVerstopft);
+        StartCoroutine(SpawnZufuhr());
         if (abflussVerstopft)
             isRising = true;
+    }
+
+    private IEnumerator SpawnZufuhr()
+    {
+        zufuhr.SetActive(true);
+        yield return new WaitForSeconds(2);
+        zufuhr.SetActive(false);
     }
 }

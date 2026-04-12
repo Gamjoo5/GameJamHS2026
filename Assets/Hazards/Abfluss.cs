@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Abfluss : MonoBehaviour
@@ -6,17 +7,10 @@ public class Abfluss : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("DeathObject"))
         {
             poison.abflussVerstopft = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            poison.abflussVerstopft = false;
+            Debug.Log("Abfluss verstopft");
         }
     }
 }
