@@ -68,6 +68,7 @@ public class PlayerController2D : MonoBehaviour
     private bool _hasLighter;
     private bool _isAlreadyDead = false;
     private WaterState _currentWaterState = WaterState.Walking;
+    public bool IsOnWater => _isOnWater;
 
     #region Unity Lifecycle
 
