@@ -145,6 +145,8 @@ public class PlayerController2D : MonoBehaviour
 
     #region Public Methods
 
+    public bool IsHeavy => _currentWaterState == WaterState.Falling;
+
     public void SetHasFlintAndSteel(bool state)
     {
         Debug.Log($"[PlayerController2D] Flint and Steel state set to: {state}");
