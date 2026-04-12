@@ -59,6 +59,7 @@ public class KillButton : MonoBehaviour
     private void killPlayer()
     {
         isKillPending = true;
+        if (player != null) player.SetBurning(true);
         StartCoroutine(KillNachXSekunden());
     }
 
@@ -72,6 +73,7 @@ public class KillButton : MonoBehaviour
             {
                 Debug.Log("[KillButton] Player is on water, stopping kill timer.");
                 isKillPending = false;
+                if (player != null) player.SetBurning(false);
                 yield break;
             }
             yield return new WaitForSeconds(0.1f);
@@ -79,6 +81,7 @@ public class KillButton : MonoBehaviour
         }
 
         player.Die();
+        if (player != null) player.SetBurning(false);
         
         // Wait a small bit before resetting pending flag to avoid immediate re-triggering if respawned on button
         yield return new WaitForSeconds(0.5f);
