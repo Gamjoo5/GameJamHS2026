@@ -11,7 +11,10 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        float savedVolume = PlayerPrefs.GetFloat("Lautstaerke", 1f);
+        float savedVolume = PlayerPrefs.HasKey("Lautstaerke")
+            ? PlayerPrefs.GetFloat("Lautstaerke", 1f)
+            : 1f;
+        if (savedVolume <= 0f) savedVolume = 1f;
         AudioListener.volume = savedVolume;
 
         if (lautstärkeSlider != null)
