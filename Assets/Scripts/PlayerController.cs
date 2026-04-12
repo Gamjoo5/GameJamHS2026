@@ -20,6 +20,7 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("How much movement control is retained while in the air.")]
     [SerializeField] private float jumpHorizontalMultiplier = 0.5f;
     [SerializeField] private float lighterOffset = -0.7f;
+    [SerializeField] private float burningOffset = 0.5f;
 
     [Header("Death & Respawn")]
     [Tooltip("The prefab instantiated when the player dies.")]
@@ -41,6 +42,8 @@ public class PlayerController2D : MonoBehaviour
     [Space(5)]
     [Tooltip("Visual representation of the lighter (Lighter) item.")]
     [SerializeField] private SpriteRenderer lighterRenderer;
+    [Tooltip("Visual representation of the burning state.")]
+    [SerializeField] private SpriteRenderer burningRenderer;
 
     [Header("Collision & Layers")]
     [Tooltip("Transform used to check for ground.")]
@@ -66,6 +69,7 @@ public class PlayerController2D : MonoBehaviour
     private bool _isRotated;
     private bool _hasFlintAndSteel;
     private bool _hasLighter;
+    private bool _isBurning = false;
     private bool _isAlreadyDead = false;
     private WaterState _currentWaterState = WaterState.Walking;
     public bool IsOnWater => _isOnWater;
@@ -181,6 +185,13 @@ public class PlayerController2D : MonoBehaviour
         UpdateItemVisibility();
     }
 
+    public void SetBurning(bool state)
+    {
+        Debug.Log($"[PlayerController2D] Burning state set to: {state}");
+        _isBurning = state;
+        UpdateBurningVisibility();
+    }
+
     public void Die()
     {
         if (_isAlreadyDead)
@@ -188,6 +199,7 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
         _isAlreadyDead = true;
+        SetBurning(false);
 
         Debug.Log("[PlayerController2D] Player died.");
         
@@ -260,8 +272,15 @@ public class PlayerController2D : MonoBehaviour
                     if (collider.gameObject.name.Contains("DeathObject") || (deathObjectPrefab != null && collider.gameObject.name.Contains(deathObjectPrefab.name)))
                     {
                         Debug.Log($"[PlayerController2D] Burning and destroying: {collider.gameObject.name}");
-                        Destroy(collider.gameObject);
-                        break; // Destroy one at a time?
+                        
+                        SpawnCorpse spawnCorpse = collider.gameObject.GetComponent<SpawnCorpse>();
+                        if (spawnCorpse != null)
+                        {
+                            spawnCorpse.ShowBurnSprite();
+                        }
+                        
+                        Destroy(collider.gameObject, 2f);
+                        break; // Destroy one at a time
                     }
                 }
             }
@@ -287,6 +306,17 @@ public class PlayerController2D : MonoBehaviour
             {
                 lighterRenderer.transform.localPosition = new Vector3(originalLighterLocalXPosition, lighterRenderer.transform.localPosition.y, lighterRenderer.transform.localPosition.z);
             }
+        }
+        UpdateBurningVisibility();
+    }
+
+    private void UpdateBurningVisibility()
+    {
+        if (burningRenderer != null)
+        {
+            burningRenderer.enabled = _isBurning;
+            // Maybe the burning sprite should also follow some offsets? 
+            // For now, let's keep it simple as asked.
         }
     }
 
@@ -319,6 +349,11 @@ public class PlayerController2D : MonoBehaviour
             _isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
             _isOnWater = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, waterLayer);
             
+            if (_isOnWater && _isBurning)
+            {
+                SetBurning(false);
+            }
+
             Collider2D slipperyCol = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, slipperyLayer);
             _isOnSlipperySurface = slipperyCol != null;
             if (_isOnSlipperySurface)
@@ -335,7 +370,12 @@ public class PlayerController2D : MonoBehaviour
         
         _isGrounded = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, groundCheckRadius, groundLayer).collider != null;
         _isOnWater = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, groundCheckRadius, waterLayer).collider != null;
-        
+
+        if (_isOnWater && _isBurning)
+        {
+            SetBurning(false);
+        }
+
         RaycastHit2D slipperyHit = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, groundCheckRadius, slipperyLayer);
         _isOnSlipperySurface = slipperyHit.collider != null;
         if (_isOnSlipperySurface)
