@@ -27,6 +27,8 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private GameObject deathObjectPrefab;
     [Tooltip("The position where the player respawns.")]
     [SerializeField] private Transform respawnPoint;
+    [Tooltip("The Y position at which the player dies.")]
+    [SerializeField] private float deathYThreshold = -100f;
 
     [Header("References")]
     [Tooltip("Reference to the player's Rigidbody2D.")]
@@ -117,6 +119,15 @@ public class PlayerController2D : MonoBehaviour
         CheckGround();
         CheckWallTouch();
         HandleWaterFalling();
+        CheckFallDeath();
+    }
+
+    private void CheckFallDeath()
+    {
+        if (transform.position.y < deathYThreshold)
+        {
+            Die(false);
+        }
     }
 
     private void FixedUpdate()
@@ -194,7 +205,7 @@ public class PlayerController2D : MonoBehaviour
         UpdateBurningVisibility();
     }
 
-    public void Die()
+    public void Die(bool spawnCorpse = true)
     {
         if (_isAlreadyDead)
         {
@@ -205,7 +216,7 @@ public class PlayerController2D : MonoBehaviour
 
         Debug.Log("[PlayerController2D] Player died.");
         
-        if (deathObjectPrefab != null)
+        if (spawnCorpse && deathObjectPrefab != null)
         {
             Debug.Log("DeathPreFab reached!");
             Instantiate(deathObjectPrefab, transform.position, transform.rotation);
