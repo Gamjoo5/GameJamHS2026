@@ -42,11 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackBackGround
+    uniqueID: 2013755641
+    locked: 0
   - name: Background
     uniqueID: 965998299
     locked: 0
   - name: Behind Tilemap
     uniqueID: 116545769
+    locked: 0
+  - name: Details
+    uniqueID: 2755966827
     locked: 0
   - name: Tilemap
     uniqueID: 1944341477
