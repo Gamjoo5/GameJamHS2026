@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1531577755
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3980104607598228893, guid: c502de7faad79f6cea1c121d2a6b4643, type: 3}
@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d1d23b11d046c99d9b8c245decca70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlintAndSteelTrigger
+  enterSound: {fileID: 8300000, guid: dfcfbf90858996934b182fa15596c6f5, type: 3}
+  volume: 1
 --- !u!61 &6046897609951248333
 BoxCollider2D:
   m_ObjectHideFlags: 0
