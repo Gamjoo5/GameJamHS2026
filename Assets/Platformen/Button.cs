@@ -4,11 +4,14 @@ using UnityEngine.Events;
 
 public class Button : MonoBehaviour
 {
+    [Header("Settings")]
     public UnityEvent onButtonPressed;
     public UnityEvent onButtonReleased;
 
-    [Header("Texturen")]
+    [Header("Sprites & Visuals")]
+    [Tooltip("Sprite shown when the button is pressed.")]
     public Sprite buttonpressed;
+    [Tooltip("Sprite shown when the button is released.")]
     public Sprite buttonreleased;
 
     private SpriteRenderer sr;

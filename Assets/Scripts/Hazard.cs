@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("References")]
+    [Tooltip("The player's Rigidbody2D that triggers this hazard.")]
     [SerializeField] private Rigidbody2D player;
 
     #region Unity Lifecycle

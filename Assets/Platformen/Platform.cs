@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Settings")]
     public float speed;
     public Transform startingPoint;
-    //public Transform[] points;
-
-    public Button relButton;
-
     public Transform endpoint;
+
+    [Header("References")]
+    public Button relButton;
 
     private int i;
     //private bool isMoving = false;

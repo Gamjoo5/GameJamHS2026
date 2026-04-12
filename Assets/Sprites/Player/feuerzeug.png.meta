@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6ea6873a3388fa543b8adee61f4d166c
+guid: c502de7faad79f6cea1c121d2a6b4643
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3932133499221316732
-    second: hantel_0
+      213: 3980104607598228893
+    second: feuerzeug_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hantel_0
+      name: feuerzeug_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 22
-        width: 206
-        height: 206
+        x: 90
+        y: 0
+        width: 70
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 48bef717a614e69c0800000000000000
-      internalID: -3932133499221316732
+      spriteID: d95b9c89d0c2c3730800000000000000
+      internalID: 3980104607598228893
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      hantel_0: -3932133499221316732
+      feuerzeug_0: 3980104607598228893
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
