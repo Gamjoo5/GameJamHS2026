@@ -1,4 +1,3 @@
-using System.Net;
 using UnityEngine;
 
 public class Poison : MonoBehaviour
@@ -7,17 +6,29 @@ public class Poison : MonoBehaviour
     public Transform targetpoint;
     public int speed;
 
+    private bool isRising = false;
+
     private void Start()
     {
         abflussVerstopft = true;
     }
 
+    private void Update()
+    {
+        if (isRising)
+        {
+            transform.position = Vector2.MoveTowards(
+                transform.position, targetpoint.position, speed * Time.deltaTime);
+
+            if ((Vector2)transform.position == (Vector2)targetpoint.position)
+                isRising = false;
+        }
+    }
+
     public void Rise()
     {
         Debug.Log(abflussVerstopft);
-        if (abflussVerstopft) 
-        {
-            transform.position = Vector2.MoveTowards(transform.position, targetpoint.position, speed * Time.deltaTime);
-        }
+        if (abflussVerstopft)
+            isRising = true;
     }
 }

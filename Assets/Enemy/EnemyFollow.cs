@@ -32,4 +32,6 @@ public class EnemyFollow : MonoBehaviour
 
         rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocityY);
     }
+
+
 }
