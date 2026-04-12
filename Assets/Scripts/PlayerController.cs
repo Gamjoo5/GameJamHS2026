@@ -207,12 +207,13 @@ public class PlayerController2D : MonoBehaviour
 
     public void Die(bool spawnCorpse = true)
     {
+        SetBurning(false);
+
         if (_isAlreadyDead)
         {
             return;
         }
         _isAlreadyDead = true;
-        SetBurning(false);
 
         Debug.Log("[PlayerController2D] Player died.");
         
